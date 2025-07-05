@@ -29,9 +29,12 @@ if matches_file and deliveries_file:
     st.write("Matches where toss winner also won the match:", toss_match_win.shape[0])
 
     # Top Run Scorers
-    st.subheader("🔥 Top Run Scorers")
-    top_batsmen = deliveries.groupby('batsman')['batsman_runs'].sum().sort_values(ascending=False).head(10)
-    st.bar_chart(top_batsmen)
+    runs = deliveries.groupby('batter')['batsman_runs'].sum().sort_values(ascending=False).head(10)
+    runs.plot(kind='bar', color='green', title='Top Run Scorers')
+    plt.ylabel("Runs")
+    plt.xticks(rotation=45)
+    plt.show()
+
 
     # Top Wicket Takers
     st.subheader("🎯 Top Wicket Takers")
